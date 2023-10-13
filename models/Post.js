@@ -11,9 +11,9 @@ const postSchema = new Schema(
         "Post must be less than 280 characters."
       ]
     },
-    username: {
-      type: String,
-      required: true
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User"
     },
     createdAt: {
       type: Date,
@@ -30,10 +30,15 @@ const postSchema = new Schema(
   },
   {
     toJSON: {
+      virtuals: true,
       getters: true
     }
   }
 );
+
+postSchema.virtual("user.username").get(function () {
+  return this.user.username;
+});
 
 // Initialize our Post model
 const Post = model("Post", postSchema);

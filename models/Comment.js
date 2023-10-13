@@ -11,9 +11,9 @@ const commentSchema = new Schema(
         "Comment must be less than 280 characters."
       ]
     },
-    username: {
-      type: String,
-      required: true
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User"
     },
     createdAt: {
       type: Date,
@@ -24,10 +24,15 @@ const commentSchema = new Schema(
   },
   {
     toJSON: {
+      virtuals: true,
       getters: true
     }
   }
 );
+
+commentSchema.virtual("user.username").get(function () {
+  return this.user.username;
+});
 
 // Initialize our Comment model
 const Comment = model("Comment", commentSchema);
