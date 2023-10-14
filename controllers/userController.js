@@ -38,6 +38,24 @@ module.exports = {
     }
   },
 
+  // update a user
+  async updateUser(req, res) {
+    try {
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        req.body,
+        { new: true, runValidators: true }
+      );
+
+      if (!user) {
+        return res.status(404).json({ message: "No user with that ID" });
+      }
+      res.json(user);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
   // delete a user and associated posts and comments
   async deleteUser(req, res) {
     try {
@@ -50,6 +68,44 @@ module.exports = {
       await Post.deleteMany({ _id: { $in: user.posts } });
       await Comment.deleteMany({ _id: { $in: user.comments } });
       res.json({ message: "User and associated posts and comments deleted!" });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
+  // add a friend
+  async addFriend(req, res) {
+    try {
+      const friend = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $addToSet: { friends: req.params.friendId } },
+        { new: true }
+      );
+
+      if (!friend) {
+        return res.status(404).json({ message: "No user with that ID" });
+      }
+
+      res.json(friend);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
+  // remove a friend
+  async removeFriend(req, res) {
+    try {
+      const friend = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $pull: { friends: req.params.friendId } },
+        { new: true }
+      );
+
+      if (!friend) {
+        return res.status(404).json({ message: "No user with that ID" });
+      }
+
+      res.json(friend);
     } catch (err) {
       res.status(500).json(err);
     }

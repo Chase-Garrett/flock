@@ -8,6 +8,14 @@ const userSchema = new Schema({
     required: true,
     trim: true
   },
+  // email of user
+  email: {
+    type: String,
+    unique: true,
+    required: true,
+    // match a valid email address
+    match: [/.+@.+\..+/, "Must match an email address!"]
+  },
   // Array of _id values referencing the post model
   posts: [
     {

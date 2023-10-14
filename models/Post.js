@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const dateFormat = require("../utils/dateFormat");
 
 // Schema to create Post model
 const postSchema = new Schema(
@@ -18,7 +19,6 @@ const postSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      // Use getter method to format timestamp
       get: (createdAtVal) => dateFormat(createdAtVal)
     },
     comments: [

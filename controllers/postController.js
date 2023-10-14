@@ -1,4 +1,4 @@
-const { User, Post } = require("../../models");
+const { User, Post } = require("../models");
 
 module.exports = {
   // get all posts
@@ -14,7 +14,10 @@ module.exports = {
   // create a new post
   async createPost(req, res) {
     try {
-      const post = await Post.create(req.body);
+      const post = await Post.create({
+        postText: req.body.postText,
+        user: req.params.userId
+      });
       const updatedUser = await User.findOneAndUpdate(
         { _id: req.params.userId },
         { $push: { posts: post._id } },
