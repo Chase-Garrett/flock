@@ -4,9 +4,10 @@ module.exports = {
   // get all posts
   async getPosts(req, res) {
     try {
-      const posts = await Post.find();
+      const posts = await Post.find().populate("user");
       res.json(posts);
     } catch (err) {
+      console.log(err);
       res.status(500).json(err);
     }
   },

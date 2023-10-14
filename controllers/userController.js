@@ -66,8 +66,7 @@ module.exports = {
       }
 
       await Post.deleteMany({ _id: { $in: user.posts } });
-      await Comment.deleteMany({ _id: { $in: user.comments } });
-      res.json({ message: "User and associated posts and comments deleted!" });
+      res.json({ message: "User and associated posts deleted!" });
     } catch (err) {
       res.status(500).json(err);
     }

@@ -12,9 +12,6 @@ const {
 // /api/users
 router.route("/").get(getUsers);
 
-// /api/users/:userId
-router.route("/:userId").get(getSingleUser);
-
 // /api/users/create
 router.route("/create").post(createUser);
 
@@ -25,9 +22,12 @@ router.route("/update/:userId").put(updateUser);
 router.route("/delete/:userId").delete(deleteUser);
 
 // /api/users/:userId/friends/add/:friendId
-router.route("/:userId/friends/add/:friendId").put(addFriend);
+router.route("/:userId/friends/add/:friendId").post(addFriend);
 
 // /api/users/:userId/friends/remove/:friendId
-router.route("/:userId/friends/remove/:friendId").put(removeFriend);
+router.route("/:userId/friends/remove/:friendId").delete(removeFriend);
+
+// /api/users/:userId
+router.route("/:userId").get(getSingleUser);
 
 module.exports = router;
