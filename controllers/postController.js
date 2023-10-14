@@ -1,12 +1,13 @@
-const { User, Post } = require("../../models");
+const { User, Post } = require("../models");
 
 module.exports = {
   // get all posts
   async getPosts(req, res) {
     try {
-      const posts = await Post.find();
+      const posts = await Post.find().populate("user");
       res.json(posts);
     } catch (err) {
+      console.log(err);
       res.status(500).json(err);
     }
   },
@@ -14,7 +15,10 @@ module.exports = {
   // create a new post
   async createPost(req, res) {
     try {
-      const post = await Post.create(req.body);
+      const post = await Post.create({
+        postText: req.body.postText,
+        user: req.params.userId
+      });
       const updatedUser = await User.findOneAndUpdate(
         { _id: req.params.userId },
         { $push: { posts: post._id } },
