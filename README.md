@@ -46,7 +46,7 @@ For the comments the routes are as follows:
 - `/api/comments/create/:userId/:postId` creates a comment on a post matching the postId for the user matching the userId
 - `/api/comments/delete/:postId/:commentId` deletes a comment on a post where the respective ids match
 
-A video walkthrough of these API calls using Insomnia can be found [here]().
+A video walkthrough of these API calls using Insomnia can be found [here](https://drive.google.com/file/d/1ksKQ7-ucCsA6VppPKA_6eUpA3u48MUI8/view).
 
 ## Credits
 
