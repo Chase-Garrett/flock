@@ -26,7 +26,7 @@ To install simply clone the repository, navigate to the cloned repo and run `npm
 
 ## Usage
 
-Once you have cloned the repository and verified all depencies are correctly installed, you can run the application by using either or `npm run start`. As this is a backend API the best way to interface with this is to use a program like "Insomnia". You are able to make normal CRUD HTTP requests as outlined in the routes directory. Running locally the application is set for `localhost:3001` thus all API routes will follow the format `localhost:3001/api/`. For users the routes are as follows:
+Once you have cloned the repository and verified all depencies are correctly installed, you can run the application by using `npm run start`. As this is a backend API the best way to interface with this is to use a program like "Insomnia". You are able to make normal CRUD HTTP requests as outlined in the routes directory. Running locally the application is set for `localhost:3001` thus all API routes will follow the format `localhost:3001/api/`. For users the routes are as follows:
 
 - `/api/users/` returns all users
 - `/api/users/:userId` returns an individual user matching the userId
